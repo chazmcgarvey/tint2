@@ -130,8 +130,9 @@ const char* clock_get_tooltip(void* obj)
 
 void init_clock()
 {
-	if(time1_format && clock_timeout==0) {
-		if (strchr(time1_format, 'S') || strchr(time1_format, 'T') || strchr(time1_format, 'r'))
+	if((time1_format || time2_format) && clock_timeout==0) {
+		if (strchr(time1_format, 'S') || strchr(time1_format, 'T') || strchr(time1_format, 'r') ||
+		    strchr(time2_format, 'S') || strchr(time2_format, 'T') || strchr(time2_format, 'r'))
 			clock_timeout = add_timeout(10, 1000, update_clocks_sec, 0);
 		else
 			clock_timeout = add_timeout(10, 1000, update_clocks_min, 0);

@@ -20,6 +20,7 @@
 #include "taskbar.h"
 #include "systraybar.h"
 #include "launcher.h"
+#include "freespace.h"
 
 #ifdef ENABLE_BATTERY
 #include "battery.h"
@@ -113,6 +114,8 @@ typedef struct {
 #endif
 
 	Launcher launcher;
+
+	FreeSpace freespace;
 
 	// autohide
 	int is_hidden;

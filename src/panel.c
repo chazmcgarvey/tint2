@@ -190,6 +190,9 @@ void init_panel()
 			}
 			if (panel_items_order[k] == 'C')
 				init_clock_panel(p);
+
+			if (panel_items_order[k] == 'F')
+				init_freespace_panel(p);
 		}
 		set_panel_items_order(p);
 
@@ -409,6 +412,9 @@ void set_panel_items_order(Panel *p)
 		}
 		if (panel_items_order[k] == 'C')
 			p->area.list = g_slist_append(p->area.list, &p->clock);
+
+		if (panel_items_order[k] == 'F')
+			p->area.list = g_slist_append(p->area.list, &p->freespace);
 	}
 	init_rendering(&p->area, 0);
 }

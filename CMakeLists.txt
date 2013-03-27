@@ -32,6 +32,7 @@ include_directories( ${PROJECT_BINARY_DIR}
                      src/taskbar
                      src/launcher
                      src/tooltip
+					 src/freespace
                      src/util
                      ${X11_INCLUDE_DIRS}
                      ${PANGOCAIRO_INCLUDE_DIRS}
@@ -55,6 +56,7 @@ set( SOURCES src/config.c
              src/taskbar/taskbar.c
              src/taskbar/taskbarname.c
              src/tooltip/tooltip.c
+             src/freespace/freespace.c
              src/util/area.c
              src/util/common.c
              src/util/timer.c

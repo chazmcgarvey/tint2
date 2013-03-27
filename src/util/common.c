@@ -22,10 +22,13 @@
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
 #include <X11/extensions/Xrender.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <fnmatch.h>
 
 #include "common.h"
 #include "../server.h"
@@ -341,4 +344,47 @@ void render_image(Drawable d, int x, int y, int w, int h)
 	XFreePixmap(server.dsp, pmap_tmp);
 	XRenderFreePicture(server.dsp, pict_image);
 	XRenderFreePicture(server.dsp, pict_drawable);
+}
+
+/**
+ * @brief
+ *  Scan given directory for files which are meet the given mask and sort them alphabetically
+ *
+ * @param path	- directory path
+ * @param mask	- filename mask
+ *
+ * @return files list
+ */
+GList *dir_scan_alpha(const char *path, const char *mask)
+{
+	GError *err = NULL;
+	GList *list = NULL;
+	const char *n;
+	gchar *fn;
+	struct stat st;
+
+	GDir *dir = g_dir_open(path, 0, &err);
+
+	if (!dir) {
+		fprintf(stderr, "%s\n", err->message);
+		g_error_free(err);
+	} else {
+		// Enumerate files
+		while ((n = g_dir_read_name(dir))) {
+			if (!fnmatch(mask, n, FNM_PATHNAME)) {
+				fn = g_build_filename(path, n, NULL);
+
+				if (stat((char *)fn, &st) < 0)
+					continue;
+
+				// Only regular files
+				if (S_ISREG(st.st_mode))
+					list = g_list_prepend(list, (gpointer)fn);
+			}
+		}
+
+		list = g_list_sort (list, (GCompareFunc) &strcmp);
+	}
+
+	return list;
 }

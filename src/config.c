@@ -591,6 +591,18 @@ void add_entry (char *key, char *value)
 		char *app = strdup(value);
 		panel_config.launcher.list_apps = g_slist_append(panel_config.launcher.list_apps, app);
 	}
+	else if (strcmp(key, "launcher_apps_dir") == 0) {
+
+		GList *list = dir_scan_alpha(value, "*.desktop");
+
+		for (list = g_list_first(list); list; list = g_list_next(list)) {
+			fprintf(stderr, "Add launcher app: %s\n", (const char *)list->data);
+			panel_config.launcher.list_apps = g_slist_append(panel_config.launcher.list_apps, (char *)strdup((const char *)list->data));
+		}
+
+		// Cleanup
+		g_list_free_full(list, g_free);
+	}
 	else if (strcmp(key, "launcher_icon_theme") == 0) {
 		// if XSETTINGS manager running, tint2 use it.
 		if (!icon_theme_name)

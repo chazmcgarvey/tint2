@@ -57,5 +57,7 @@ void adjust_asb(DATA32 *data, int w, int h, int alpha, float satur, float bright
 void createHeuristicMask(DATA32* data, int w, int h);
 
 void render_image(Drawable d, int x, int y, int w, int h);
+
+GList *dir_scan_alpha(const char *path, const char *mask);
 #endif
 

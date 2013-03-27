@@ -23,7 +23,8 @@ border_color = #FFFFFF 69
 
 # Panel
 panel_monitor = all
-panel_position = bottom center horizontal
+#panel_position = bottom center horizontal
+panel_position = top center horizontal
 panel_size = 94% 30
 panel_margin = 0 0
 panel_padding = 7 0 7
@@ -57,6 +58,7 @@ task_active_background_id = 2
 task_urgent_background_id = 2
 task_iconified_background_id = 3
 task_tooltip = 0
+task_align = right
 
 # Task Icons
 task_icon_asb = 70 0 0

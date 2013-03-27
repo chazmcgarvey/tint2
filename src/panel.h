@@ -61,6 +61,9 @@ extern int panel_autohide_height;  // for vertical panels this is of course the 
 extern int panel_strut_policy;
 extern char *panel_items_order;
 
+// tasks alignment
+enum { ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT };
+
 extern int  max_tick_urgent;
 
 extern GArray* backgrounds;

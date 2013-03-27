@@ -29,7 +29,8 @@ border_color = #FFFFFF 20
 
 # Panel
 panel_monitor = all
-panel_position = bottom center horizontal
+#panel_position = bottom center horizontal
+panel_position = top center horizontal
 panel_size = 92% 28
 panel_margin = 0 0
 panel_padding = 7 0 7

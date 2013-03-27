@@ -63,6 +63,8 @@ task_active_background_id = 3
 task_urgent_background_id = 3
 task_iconified_background_id = 0
 task_tooltip = 1
+#task_align = center
+task_align = right
 
 # Task Icons
 task_icon_asb = 90 -100 -20

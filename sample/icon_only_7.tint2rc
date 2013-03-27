@@ -23,7 +23,9 @@ border_color = #CCCCCC 40
 
 # Panel
 panel_monitor = all
-panel_position = bottom center horizontal
+#panel_position = bottom center horizontal
+#panel_position = top center horizontal
+panel_position = top center vertical
 panel_size = 95% 30
 panel_margin = 0 0
 panel_padding = 7 3 7
@@ -41,6 +43,7 @@ strut_policy = follow_size
 
 # Taskbar
 taskbar_mode = multi_desktop
+#taskbar_mode = single_desktop
 taskbar_padding = 0 0 0
 taskbar_background_id = 2
 taskbar_active_background_id = 2
@@ -57,6 +60,9 @@ task_active_background_id = 3
 task_urgent_background_id = 0
 task_iconified_background_id = 0
 task_tooltip = 1
+#task_align = left
+#task_align = center
+task_align = right
 
 # Task Icons
 task_icon_asb = 100 0 0

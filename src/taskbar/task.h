@@ -26,6 +26,7 @@ typedef struct {
 	int text;
 	int icon;
 	int centered;
+	int align;
 
 	int icon_posy;
 	int icon_size1;

@@ -484,6 +484,14 @@ void add_entry (char *key, char *value)
 		if (value2) panel_config.g_task.area.paddingy = atoi (value2);
 		if (value3) panel_config.g_task.area.paddingx = atoi (value3);
 	}
+	else if (strcmp (key, "task_align") == 0) {
+		extract_values(value, &value1, &value2, &value3);
+		printf("task_align: %s\n", value1);
+		if (strcmp (value1, "left") == 0) panel_config.g_task.align = ALIGN_LEFT;
+		else if (strcmp (value1, "center") == 0) panel_config.g_task.align = ALIGN_CENTER;
+		else if (strcmp (value1, "right") == 0) panel_config.g_task.align = ALIGN_RIGHT;
+		else fprintf(stderr, "Unknown value for task_align: %s\n", value1);
+	}
 	else if (strcmp (key, "task_font") == 0) {
 		panel_config.g_task.font_desc = pango_font_description_from_string (value);
 	}

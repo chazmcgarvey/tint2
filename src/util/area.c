@@ -130,6 +130,54 @@ void size_by_content (Area *a)
 }
 
 
+// calculate total size of all children including
+// parent's padding
+int children_size(Area *a, int horizontal)
+{
+	int size = 0;
+	GSList *l;
+
+	for (l = a->list; l; l = l->next) {
+		Area *child = ((Area*)l->data);
+		if (!child->on_screen) continue;
+
+		if (horizontal)
+			size += child->width + a->paddingx;
+		else
+			size += child->height + a->paddingy;
+	}
+
+	return size;
+}
+
+
+// calculate chilren's align offset depending on the align type
+int align_offset(Area *a, int align, int horizontal)
+{
+	int size = 0;
+	int child_size = children_size(a, horizontal);
+
+	if (horizontal)
+		size = a->width;
+	else
+		size = a->height;
+
+	switch (align) {
+	case ALIGN_LEFT:
+		return 0;
+
+	case ALIGN_CENTER:
+		return (size - child_size) / 2;
+
+	case ALIGN_RIGHT:
+		return size - child_size;
+
+	default:
+		return 0;
+	}
+}
+
+
 void size_by_layout (Area *a, int pos, int level)
 {
 	// don't resize hiden objects
@@ -179,7 +227,9 @@ void size_by_layout (Area *a, int pos, int level)
 		int k;
 		for (k=0 ; k < level ; k++) printf("  ");
 		printf("tree level %d, object %d, pos %d, %s\n", level, i, pos, (child->size_mode == SIZE_BY_LAYOUT) ? "SIZE_BY_LAYOUT" : "SIZE_BY_CONTENT");*/
-		size_by_layout(child, pos, level+1);
+
+		int offset = align_offset(child, panel_config.g_task.align, panel_horizontal);
+		size_by_layout(child, pos + offset, level + 1);
 		
 		if (panel_horizontal)
 			pos += child->width + a->paddingx;
